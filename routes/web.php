@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Bac\BacController;
+use App\Http\Controllers\licence\LicenceController;
+use App\Http\Controllers\Matiere\MatiereController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -74,13 +76,34 @@ Route::group(['middleware' => 'auth'], function () {
 
 
                 /* debut les routes de abdessamad* */
+
+				 /* debut des routes pour entitie bac  * */
     Route::get('/bac/create',[BacController::class,'create']);
     Route::post('/table/bac/create',[BacController::class,'store']);
     Route::get('tables',[BacController::class,'index'])->name('tables');
     Route::get('/bac/delete/{id}',[BacController::class,'delete']);
-    Route::get('/update/{id}',[BacController::class,'edit']);
+    Route::get('/updatebac/{id}',[BacController::class,'edit']);
     Route::post('bac/update/{id}',[BacController::class,'update']);
+	          /* fin des routes pour entitie bac* */
+			  
+				 /* debut des routes pour entitie matiere  * */
 
+    Route::get('/matiere/create',[MatiereController::class,'create']);
+    Route::post('/table/matiere/create',[MatiereController::class,'store']);
+    Route::get('/update/{id}',[MatiereController::class,'edit']);
+    Route::post('matiere/update/{id}',[MatiereController::class,'update']);
+    Route::get('/matiere/delete/{id}',[MatiereController::class,'delete']);
+	       /* fin des routes pour entitie matiere* */
+
+		   /* debut des routes pour entitie licence  * */
+ 	Route::get('/licence/create',[LicenceController::class,'create']);
+	Route::post('/table/licence/create',[LicenceController::class,'store']);
+	Route::get('/updatelicence/{id}',[LicenceController::class,'edit']);
+	Route::post('licence/update/{id}',[LicenceController::class,'update']);
+	Route::get('/licence/delete/{id}',[LicenceController::class,'delete']);
+		    /* fin des routes pour entitie licence* */
+
+ 
                 /* fin les routes de abdessamad* */
 });
 

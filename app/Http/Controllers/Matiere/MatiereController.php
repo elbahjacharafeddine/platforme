@@ -1,37 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Bac;
+namespace App\Http\Controllers\Matiere;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bac;
 use Illuminate\Http\Request;
+use App\Models\Matiere;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class BacController extends Controller
+class MatiereController extends Controller
 {
 
-    public function index(){
-        $data_bac = DB::table('bacs')->get();
-        $data_matiere = DB::table('matieres')->get();
-        $data_licence = DB::table('licences')->get();
 
-        return view('tables',compact('data_bac','data_matiere','data_licence'));
-    }
+
     public function create(){
         if(Auth::user()->role =="admin"){
-            return view('second-view/bac/create');
+            return view('second-view/matiere/create');
         }
         else{
             return redirect('dashboard');
         }
-
     }
+
     public function store(Request $request){
         if(Auth::user()->role =="admin"){
-            $bac = new Bac();
-            $bac->name = $request->name;
-            $bac->save();
+            $matiere = new Matiere();
+            $matiere->name = $request->name;
+            $matiere->save();
             return redirect('tables');
         }
         else{
@@ -39,21 +34,21 @@ class BacController extends Controller
         }
 
     }
-
     public function edit($id){
         if(Auth::user()->role=="admin"){
-            $data = DB::table('bacs')->where('id',$id)->get();
-            return view('second-view/bac/update',compact('data'));
+            $data_matiere = DB::table('matieres')->where('id',$id)->get();
+            return view('second-view/matiere/update',compact('data_matiere'));
         }
         else{
             return redirect('dashboard');
         }
     }
+
     public function update(Request $request,$id){
         if(Auth::user()->role=="admin"){
-            $bacs = Bac::find($id);
+            $matieres = Matiere::find($id);
             $input = $request->all();
-            $bacs->update($input);
+            $matieres->update($input);
             return redirect('tables');
         }
         else{
@@ -63,12 +58,11 @@ class BacController extends Controller
 
     public function delete($id){
         if(Auth::user()->role=="admin"){
-            DB::table('bacs')->where('id',$id)->delete();
+            DB::table('matieres')->where('id',$id)->delete();
             return redirect('tables');
         }
         else{
             return redirect('dashboard');
         }
     }
-
 }
