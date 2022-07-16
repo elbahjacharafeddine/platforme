@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Bac\BacController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/user-management',[HomeController::class,'userManagement'])->name('user-management');
+    Route::get('/user-management/{id}',[InfoUserController::class,'detailUser'])->name('user-detail');
+    Route::get('delete/user/{id}',[InfoUserController::class,'deleteUser']);
+
+
+    Route::post('/user-profile/update',[InfoUserController::class,'updateProfile']);
 
     Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', function () {
@@ -41,13 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('rtl');
 	})->name('rtl');
 
-	Route::get('user-management', function () {
-		return view('laravel-examples/user-management');
-	})->name('user-management');
 
-	Route::get('tables', function () {
-		return view('tables');
-	})->name('tables');
 
     Route::get('virtual-reality', function () {
 		return view('virtual-reality');
@@ -67,6 +69,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
+
+
+
+
+                /* debut les routes de abdessamad* */
+    Route::get('/bac/create',[BacController::class,'create']);
+    Route::post('/table/bac/create',[BacController::class,'store']);
+    Route::get('tables',[BacController::class,'index'])->name('tables');
+    Route::get('/bac/delete/{id}',[BacController::class,'delete']);
+    Route::get('/update/{id}',[BacController::class,'edit']);
+    Route::post('bac/update/{id}',[BacController::class,'update']);
+
+                /* fin les routes de abdessamad* */
 });
 
 
