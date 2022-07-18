@@ -3,6 +3,7 @@
 use App\Http\Controllers\Bac\BacController;
 use App\Http\Controllers\licence\LicenceController;
 use App\Http\Controllers\Matiere\MatiereController;
+use App\Http\Controllers\Filiere\FiliereController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Bac;
+use App\Models\Matiere;
+use App\Models\Licence;
 use App\Models\Filiere;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -122,6 +125,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/licence/delete/{id}',[LicenceController::class,'delete']);
 		    /* fin des routes pour entitie licence* */
 
+                /* debut des routes pour entitie filiere* */
+
+     Route::get('filiere/create', [FiliereController::class,'create'])->name('filiere.create');
  
                 /* fin les routes de abdessamad* */
 });
