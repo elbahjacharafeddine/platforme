@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bac_filiere', function (Blueprint $table) {
+        Schema::create('filiere_matiere', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bac_id');
-            $table->foreign('bac_id')->references('id')->on('bacs')->onDelete('cascade');
-            $table->unsignedBigInteger('filiere_id');
-            $table->foreign('filiere_id')->references('id')->on('filieres')->onDelete('cascade');
-            $table->string('bonus');
             $table->timestamps();
+            $table->integer('filiere_id')->unsigned();
+            $table->integer('matiere_id')->unsigned();
+            $table->string('coefficient_matiere');
         });
     }
 
@@ -31,7 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bac_filiere');
-
+        Schema::dropIfExists('filiere_matiere');
     }
 };

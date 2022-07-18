@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Licence extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name'
     ];
+
+    public function filieres(){
+        return  $this->belongsToMany(Filiere::class);
+     }
 }

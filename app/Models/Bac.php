@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Bac extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'name'
     ];
 
     public function filieres(){
-       return  $this->hasMany(Filiere::class);
+       return  $this->belongsToMany(Filiere::class);
     }
 }
