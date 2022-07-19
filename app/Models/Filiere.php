@@ -12,7 +12,7 @@ class Filiere extends Model
     protected $fillable = [
         'name'
     ];
-    
+
     public function bacs(){
         return $this->belongsToMany(Bac::class);
     }

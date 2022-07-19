@@ -43,7 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+
                             @foreach($data_bac as $key =>$item)
                                 <tr>
                                     <td class="ps-4">
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
@@ -188,7 +188,4 @@
         </div>
     </div>
 </div>
-
- 
-
-  @endsection
+@endsection

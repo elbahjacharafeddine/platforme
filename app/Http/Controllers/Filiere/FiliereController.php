@@ -8,31 +8,32 @@ use App\Models\Bac;
 use App\Models\Matiere;
 use App\Models\Licence;
 use App\Models\Filiere;
+use Illuminate\Support\Facades\DB;
 
 class FiliereController extends Controller
 {
- 
-    public function create(Request $request)
-    {
+
+
+    public function create(Request $request){
         $filiere = new Filiere;
-        $filiere->name = ' Enseignement Primaire';
+        $filiere->name = $request->filiere_name;
         $filiere->save();
-        
-        //Bac
-        $bacs = Bac::find([1, 2,3]);
-        $bonus_bac=['bonus_bac'=>'6'];
-        $filiere->bacs()->attach($bacs,$bonus_bac);
 
-        //matiere
-        $matieres = Matiere::find([1, 2,3]);
-        $coefficient_matiere=['coefficient_matiere'=>'4'];
-        $filiere->matieres()->attach($matieres,$coefficient_matiere);
+        $last_filiere = Filiere::orderBy('created_at','desc')->first();
+        $checkbox_bac = $request->checkbox_bac;
+        $lent = sizeof($checkbox_bac);
+        for($i =0;$i<$lent;$i++){
+            $bonus = "bonus".$checkbox_bac[$i];
+            $last_filiere->bacs()->attach($checkbox_bac[$i],['bonus_bac' =>$request->$bonus]);
+        }
 
-        //licence
-        $licences = Licence::find([1, 2]);
-        $bonus_licence=['bonus_licence'=>'3'];
-        $filiere->licences()->attach($licences,$bonus_licence);
+        return redirect('filiere/create');
+    }
 
-        return 'Success';
+    public function index(){
+        $data_bac = DB::table('bacs')->get();
+        $data_matiere = DB::table('matieres')->get();
+        $data_licence = DB::table('licences')->get();
+        return view('filiere/create',compact('data_bac','data_matiere','data_licence'));
     }
 }

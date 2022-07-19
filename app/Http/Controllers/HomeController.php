@@ -22,10 +22,5 @@ class HomeController extends Controller
             return  redirect('dashboard');
         }
     }
-    public function index(){
-        $data_bac = DB::table('bacs')->get();
-        $data_matiere = DB::table('matieres')->get();
-        $data_licence = DB::table('licences')->get();
-        return view('filiere/create',compact('data_bac','data_matiere','data_licence'));
-    }
+
 }

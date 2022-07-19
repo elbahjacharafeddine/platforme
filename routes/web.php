@@ -10,10 +10,6 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
-use App\Models\Bac;
-use App\Models\Matiere;
-use App\Models\Licence;
-use App\Models\Filiere;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -31,23 +27,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('test/charaf',function (){
-        Filiere::create([
-            'name' =>'isic'
-        ]);
-        Filiere::create([
-            'name' =>'gi'
-        ]);
-        Bac::create([
-            'name' =>'Sc.Math'
-        ]);
 
-        $bac = Bac::first();
-        $bonus = ['bonus' =>'3'];
-        $filiere = Filiere::first();
-        $filiere->bacs()->attach($bac,$bonus);
-    });
-    Route::get('/filiere',[HomeController::class,'index']);
+
 
     Route::get('/user-management',[HomeController::class,'userManagement'])->name('user-management');
     Route::get('/user-management/{id}',[InfoUserController::class,'detailUser'])->name('user-detail');
@@ -107,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/updatebac/{id}',[BacController::class,'edit']);
     Route::post('bac/update/{id}',[BacController::class,'update']);
 	          /* fin des routes pour entitie bac* */
-			  
+
 				 /* debut des routes pour entitie matiere  * */
 
     Route::get('/matiere/create',[MatiereController::class,'create']);
@@ -127,8 +108,9 @@ Route::group(['middleware' => 'auth'], function () {
 
                 /* debut des routes pour entitie filiere* */
 
-     Route::get('filiere/create', [FiliereController::class,'create'])->name('filiere.create');
- 
+     Route::post('filiere/create',[FiliereController::class,'create']);
+     Route::get('/filiere/create',[FiliereController::class,'index']);
+
                 /* fin les routes de abdessamad* */
 });
 
