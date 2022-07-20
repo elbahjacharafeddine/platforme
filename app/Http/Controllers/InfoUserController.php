@@ -55,9 +55,7 @@ class InfoUserController extends Controller
             'cne' =>$attributes['CNE'],
             'phone' =>$attributes['phone'],
             'email' => $attribute['email'],
-            'phone'     => $attributes['phone'],
-            'location' => $attributes['location'],
-            'about_me'    => $attributes["about_me"],
+            'phone'     => $attributes['phone']
         ]);
 
 

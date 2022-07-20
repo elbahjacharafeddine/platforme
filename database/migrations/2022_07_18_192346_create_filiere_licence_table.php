@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('filiere_id')->unsigned();
             $table->integer('licence_id')->unsigned();
             $table->string('bonus_licence');
+            $table->string('coefficient_licence');
         });
     }
 

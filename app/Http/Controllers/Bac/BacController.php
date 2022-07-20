@@ -12,11 +12,16 @@ class BacController extends Controller
 {
 
     public function index(){
-        $data_bac = DB::table('bacs')->get();
-        $data_matiere = DB::table('matieres')->get();
-        $data_licence = DB::table('licences')->get();
-
-        return view('tables',compact('data_bac','data_matiere','data_licence'));
+        if(Auth::user()->role=="admin"){
+            $data_bac = DB::table('bacs')->get();
+            $data_matiere = DB::table('matieres')->get();
+            $data_licence = DB::table('licences')->get();
+            $data_filiere =DB::table('filieres')->get();
+            return view('tables',compact('data_bac','data_matiere','data_licence','data_filiere'));
+        }
+        else{
+            return redirect('dashboard');
+        }
     }
     public function create(){
         if(Auth::user()->role =="admin"){

@@ -10,6 +10,7 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,12 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 
 
+            /** les routes pour charafeddine */
+    Route::get('/inscription',[UserController::class,'index']);
+
+            /** fin les routes pour charafeddine */
+
+
 
 
                 /* debut les routes de abdessamad* */
@@ -108,8 +115,9 @@ Route::group(['middleware' => 'auth'], function () {
 
                 /* debut des routes pour entitie filiere* */
 
-     Route::post('filiere/create',[FiliereController::class,'create']);
-     Route::get('/filiere/create',[FiliereController::class,'index']);
+    Route::get('/filiere/create',[FiliereController::class,'index']);
+    Route::post('filiere/create',[FiliereController::class,'create']);
+    Route::get('filiere/update/{id}',[FiliereController::class,'update']);
 
                 /* fin les routes de abdessamad* */
 });

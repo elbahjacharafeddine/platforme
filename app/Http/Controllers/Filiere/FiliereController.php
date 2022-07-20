@@ -9,6 +9,7 @@ use App\Models\Matiere;
 use App\Models\Licence;
 use App\Models\Filiere;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FiliereController extends Controller
 {
@@ -20,20 +21,57 @@ class FiliereController extends Controller
         $filiere->save();
 
         $last_filiere = Filiere::orderBy('created_at','desc')->first();
+
+        //     pour l'isertion des donnees filiere bac
         $checkbox_bac = $request->checkbox_bac;
-        $lent = sizeof($checkbox_bac);
-        for($i =0;$i<$lent;$i++){
-            $bonus = "bonus".$checkbox_bac[$i];
-            $last_filiere->bacs()->attach($checkbox_bac[$i],['bonus_bac' =>$request->$bonus]);
+        $lent_bac = sizeof($checkbox_bac);
+        for($i =0;$i<$lent_bac;$i++){
+            $bonus_bac = "bonus_bac".$checkbox_bac[$i];
+            $coefficient_bac = "coefficient_bac".$checkbox_bac[$i];
+            $last_filiere->bacs()->attach($checkbox_bac[$i],['bonus_bac' =>$request->$bonus_bac,'coefficient_bac' =>$request->$coefficient_bac]);
         }
 
-        return redirect('filiere/create');
+        //     pour l'isertion des donnees filiere matiere
+        $checkbox_matiere =$request->checkbox_matiere;
+        $lent_matiere = sizeof($checkbox_matiere);
+        for ($j=0;$j<$lent_matiere;$j++){
+            $coefficient_matiere = "coefficient_matiere".$checkbox_matiere[$j];
+            $last_filiere->matieres()->attach($checkbox_matiere[$j],['coefficient_matiere' =>$request->$coefficient_matiere]);
+        }
+            //pour l'isertion des donnees filiere licence
+
+        $checkbox_licence = $request->checkbox_licence;
+        $lent_licence = sizeof($checkbox_licence);
+        for ($k=0;$k<$lent_licence;$k++){
+            $bonus_licence = "bonus_licence".$checkbox_licence[$k];
+            $coefficient_licence = "coefficient_licence".$checkbox_licence[$k];
+            $last_filiere->licences()->attach($checkbox_licence[$k],['bonus_licence' =>$request->$bonus_licence,'coefficient_licence' =>$request->$coefficient_licence]);
+
+        }
+
+
+        return redirect('tables');
     }
 
     public function index(){
+        if(Auth::user()->role =="admin"){
         $data_bac = DB::table('bacs')->get();
         $data_matiere = DB::table('matieres')->get();
         $data_licence = DB::table('licences')->get();
         return view('filiere/create',compact('data_bac','data_matiere','data_licence'));
+        }
+        else{
+            return redirect('dashboard');
+        }
+    }
+
+    public function update($id){
+        if(Auth::user()->role =="admin"){
+            $data_filiere = DB::table('filieres')->where('id',$id)->get();
+        }
+        else{
+            return redirect('dashboard');
+        }
+
     }
 }

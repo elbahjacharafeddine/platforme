@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('filiere_id')->unsigned();
             $table->integer('bac_id')->unsigned();
             $table->string('bonus_bac');
-            
+            $table->string('coefficient_bac');
+
         });
     }
 
