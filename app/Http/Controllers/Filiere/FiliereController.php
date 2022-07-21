@@ -58,6 +58,7 @@ class FiliereController extends Controller
         }
 
         return redirect('filiere');
+  
     }
 
     public function index(){
