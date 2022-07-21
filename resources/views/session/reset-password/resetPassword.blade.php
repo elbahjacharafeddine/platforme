@@ -8,7 +8,7 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                 <div class="card card-plain mt-8">
                     <div class="card-header pb-0 text-left bg-transparent">
-                        <h4 class="mb-0">Change password</h4>
+                        <h4 class="mb-0">Changer Le mot de passe</h4>
                     </div>
                     <div class="card-body">
                         <form role="form" action="/reset-password" method="POST">
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="password_confirmation">Confirm Password</label>
+                                <label for="password_confirmation">Confirme le mot de passe </label>
                                 <div class="">
                                     <input id="password-confirmation" name="password_confirmation" type="password" class="form-control" placeholder="Password-confirmation" aria-label="Password-confirmation" aria-describedby="Password-addon">
                                     @error('password')
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Recover your password</button>
+                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Récupérer votre mot de passe</button>
                             </div>
                         </form>
                     </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-6">
                 <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                    <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+                    <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/ensaj.png')"></div>
                 </div>
             </div>
         </div>

@@ -12,6 +12,16 @@ class LicenceController extends Controller
 {
     
 
+    
+    public function index(){
+        if(Auth::user()->role=="admin"){
+            $data_licence = DB::table('licences')->get();
+            return view('Gestion_Licences',compact('data_licence'));
+        }
+        else{
+            return redirect('dashboard');
+        }
+    }
 
     public function create(){
         if(Auth::user()->role =="admin"){
@@ -29,7 +39,7 @@ class LicenceController extends Controller
             $licence = new Licence();
             $licence->name = $request->name;
             $licence->save();
-            return redirect('tables');
+            return redirect('licence');
         }
         else{
             return redirect('dashboard');
@@ -52,7 +62,7 @@ class LicenceController extends Controller
             $licences = Licence::find($id);
             $input = $request->all();
             $licences->update($input);
-            return redirect('tables');
+            return redirect('licence');
         }
         else{
             return redirect('dashboard');
@@ -62,7 +72,7 @@ class LicenceController extends Controller
     public function delete($id){
         if(Auth::user()->role=="admin"){
             DB::table('licences')->where('id',$id)->delete();
-            return redirect('tables');
+            return redirect('licence');
         }
         else{
             return redirect('dashboard');

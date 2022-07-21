@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('filiere_id')->unsigned();
             $table->integer('matiere_id')->unsigned();
-            $table->string('coefficient_matiere');
+            $table->string('coefficient_matiere')->default('1');;
         });
     }
 

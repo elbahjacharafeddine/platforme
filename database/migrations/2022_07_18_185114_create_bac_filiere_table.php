@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('filiere_id')->unsigned();
             $table->integer('bac_id')->unsigned();
-            $table->string('bonus_bac');
-            $table->string('coefficient_bac');
+            $table->string('bonus_bac')->default('0');;
+            $table->string('coefficient_bac')->default('1');;
 
         });
     }

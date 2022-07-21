@@ -10,7 +10,7 @@ class SessionsController extends Controller
 {
     public function create()
     {
-        return view('session.login-session');
+        return view('session.Accueil');
     }
 
     public function store()
@@ -36,6 +36,6 @@ class SessionsController extends Controller
 
         Auth::logout();
 
-        return redirect('/login')->with(['success'=>'You\'ve been logged out.']);
+        return redirect('/Accueil')->with(['success'=>'You\'ve been logged out.']);
     }
 }

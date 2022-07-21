@@ -12,6 +12,15 @@ class MatiereController extends Controller
 {
 
 
+    public function index(){
+        if(Auth::user()->role=="admin"){
+            $data_matiere = DB::table('matieres')->get();
+            return view('Gestion_Matieres',compact('data_matiere'));
+        }
+        else{
+            return redirect('dashboard');
+        }
+    }
 
     public function create(){
         if(Auth::user()->role =="admin"){
@@ -27,7 +36,7 @@ class MatiereController extends Controller
             $matiere = new Matiere();
             $matiere->name = $request->name;
             $matiere->save();
-            return redirect('tables');
+            return redirect('matiere');
         }
         else{
             return redirect('dashboard');
@@ -49,7 +58,7 @@ class MatiereController extends Controller
             $matieres = Matiere::find($id);
             $input = $request->all();
             $matieres->update($input);
-            return redirect('tables');
+            return redirect('matiere');
         }
         else{
             return redirect('dashboard');
@@ -59,7 +68,7 @@ class MatiereController extends Controller
     public function delete($id){
         if(Auth::user()->role=="admin"){
             DB::table('matieres')->where('id',$id)->delete();
-            return redirect('tables');
+            return redirect('matiere');
         }
         else{
             return redirect('dashboard');

@@ -23,34 +23,41 @@ class FiliereController extends Controller
         $last_filiere = Filiere::orderBy('created_at','desc')->first();
 
         //     pour l'isertion des donnees filiere bac
-        $checkbox_bac = $request->checkbox_bac;
-        $lent_bac = sizeof($checkbox_bac);
-        for($i =0;$i<$lent_bac;$i++){
-            $bonus_bac = "bonus_bac".$checkbox_bac[$i];
-            $coefficient_bac = "coefficient_bac".$checkbox_bac[$i];
-            $last_filiere->bacs()->attach($checkbox_bac[$i],['bonus_bac' =>$request->$bonus_bac,'coefficient_bac' =>$request->$coefficient_bac]);
+        if($request->checkbox_bac != null ){
+                        $checkbox_bac = $request->checkbox_bac;
+            $lent_bac = sizeof($checkbox_bac);
+            for($i =0;$i<$lent_bac;$i++){
+                $bonus_bac = "bonus_bac".$checkbox_bac[$i];
+                $coefficient_bac = "coefficient_bac".$checkbox_bac[$i];
+                $last_filiere->bacs()->attach($checkbox_bac[$i],['bonus_bac' =>$request->$bonus_bac,'coefficient_bac' =>$request->$coefficient_bac]);
+            }
         }
+
 
         //     pour l'isertion des donnees filiere matiere
-        $checkbox_matiere =$request->checkbox_matiere;
-        $lent_matiere = sizeof($checkbox_matiere);
-        for ($j=0;$j<$lent_matiere;$j++){
-            $coefficient_matiere = "coefficient_matiere".$checkbox_matiere[$j];
-            $last_filiere->matieres()->attach($checkbox_matiere[$j],['coefficient_matiere' =>$request->$coefficient_matiere]);
+        if($request->checkbox_matiere){
+            $checkbox_matiere =$request->checkbox_matiere;
+            $lent_matiere = sizeof($checkbox_matiere);
+            for ($j=0;$j<$lent_matiere;$j++){
+                $coefficient_matiere = "coefficient_matiere".$checkbox_matiere[$j];
+                $last_filiere->matieres()->attach($checkbox_matiere[$j],['coefficient_matiere' =>$request->$coefficient_matiere]);
+            }
         }
+
             //pour l'isertion des donnees filiere licence
 
-        $checkbox_licence = $request->checkbox_licence;
-        $lent_licence = sizeof($checkbox_licence);
-        for ($k=0;$k<$lent_licence;$k++){
-            $bonus_licence = "bonus_licence".$checkbox_licence[$k];
-            $coefficient_licence = "coefficient_licence".$checkbox_licence[$k];
-            $last_filiere->licences()->attach($checkbox_licence[$k],['bonus_licence' =>$request->$bonus_licence,'coefficient_licence' =>$request->$coefficient_licence]);
+        if($request->checkbox_licence != null){
+                        $checkbox_licence = $request->checkbox_licence;
+            $lent_licence = sizeof($checkbox_licence);
+            for ($k=0;$k<$lent_licence;$k++){
+                $bonus_licence = "bonus_licence".$checkbox_licence[$k];
+                $coefficient_licence = "coefficient_licence".$checkbox_licence[$k];
+                $last_filiere->licences()->attach($checkbox_licence[$k],['bonus_licence' =>$request->$bonus_licence,'coefficient_licence' =>$request->$coefficient_licence]);
 
+            }
         }
 
-
-        return redirect('tables');
+        return redirect('filiere');
     }
 
     public function index(){
