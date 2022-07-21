@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('filiere_id')->unsigned();
             $table->integer('licence_id')->unsigned();
-            $table->string('bonus_licence');
-            $table->string('coefficient_licence');
+            $table->string('bonus_licence')->default('0');;
+            $table->string('coefficient_licence')->default('1');;
         });
     }
 

@@ -43,23 +43,17 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
-	Route::get('billing', function () {
-		return view('billing');
-	})->name('billing');
+
 
 	Route::get('profile', function () {
 		return view('profile');
 	})->name('profile');
 
-	Route::get('rtl', function () {
-		return view('rtl');
-	})->name('rtl');
+	
 
 
 
-    Route::get('virtual-reality', function () {
-		return view('virtual-reality');
-	})->name('virtual-reality');
+    
 
     Route::get('static-sign-in', function () {
 		return view('static-sign-in');
@@ -78,10 +72,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
             /** les routes pour charafeddine */
-            /** les routes pour filiere */
-    Route::get('/filiere/create',[FiliereController::class,'index']);
-    Route::post('filiere/create',[FiliereController::class,'create']);
-    Route::get('filiere/update/{id}',[FiliereController::class,'update']);
 
         /** les routes pour inscription */
     // Route::get('/inscription',[UserController::class,'first_index']);
@@ -89,27 +79,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('third-setup',[UserController::class,'second_setup']);
     Route::post('fourth-setup',[UserController::class,'third_setup']);
 
-    Route::get('inscription',[UserController::class,'index']);
+  
     Route::post('/test',[UserController::class,'index2']);
+
 
             /** fin les routes pour charafeddine */
 
 
-
+	
 
                 /* debut les routes de abdessamad* */
-
+    Route::get('/Accueil', function () {return view('session/Accueil');})->name('Accueil');
+    Route::get('/inscription',[UserController::class,'index']);
 				 /* debut des routes pour entitie bac  * */
+    Route::get('bac', [BacController::class,'index'])->name('Gestion_Baccalaureat');
     Route::get('/bac/create',[BacController::class,'create']);
     Route::post('/table/bac/create',[BacController::class,'store']);
-    Route::get('tables',[BacController::class,'index'])->name('tables');
     Route::get('/bac/delete/{id}',[BacController::class,'delete']);
     Route::get('/updatebac/{id}',[BacController::class,'edit']);
     Route::post('bac/update/{id}',[BacController::class,'update']);
 	          /* fin des routes pour entitie bac* */
 
 				 /* debut des routes pour entitie matiere  * */
-
+	Route::get('matiere', [MatiereController::class,'index'])->name('Gestion_Matieres');
     Route::get('/matiere/create',[MatiereController::class,'create']);
     Route::post('/table/matiere/create',[MatiereController::class,'store']);
     Route::get('/update/{id}',[MatiereController::class,'edit']);
@@ -118,6 +110,7 @@ Route::group(['middleware' => 'auth'], function () {
 	       /* fin des routes pour entitie matiere* */
 
 		   /* debut des routes pour entitie licence  * */
+	Route::get('licence', [LicenceController::class,'index'])->name('Gestion_Licences');
  	Route::get('/licence/create',[LicenceController::class,'create']);
 	Route::post('/table/licence/create',[LicenceController::class,'store']);
 	Route::get('/updatelicence/{id}',[LicenceController::class,'edit']);
@@ -126,7 +119,11 @@ Route::group(['middleware' => 'auth'], function () {
 		    /* fin des routes pour entitie licence* */
 
 
-
+                /* debut des routes pour entitie filiere* */
+    Route::get('filiere', [FiliereController::class,'index'])->name('Gestion_Filieres');
+    Route::get('/filiere/create',[FiliereController::class,'index']);
+    Route::post('filiere/create',[FiliereController::class,'create']);
+    Route::get('filiere/update/{id}',[FiliereController::class,'update']);
 
 
                 /* fin les routes de abdessamad* */
@@ -135,9 +132,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store']);
-    Route::get('/login', [SessionsController::class, 'create']);
+    Route::get('/inscription', [RegisterController::class, 'create']);
+    Route::post('/inscription', [RegisterController::class, 'store']);
+    Route::get('/Accueil', [SessionsController::class, 'create']);
     Route::post('/session', [SessionsController::class, 'store']);
 	Route::get('/login/forgot-password', [ResetController::class, 'create']);
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
@@ -146,6 +143,4 @@ Route::group(['middleware' => 'guest'], function () {
 
 });
 
-Route::get('/login', function () {
-    return view('session/login-session');
-})->name('login');
+

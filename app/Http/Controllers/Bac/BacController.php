@@ -14,10 +14,7 @@ class BacController extends Controller
     public function index(){
         if(Auth::user()->role=="admin"){
             $data_bac = DB::table('bacs')->get();
-            $data_matiere = DB::table('matieres')->get();
-            $data_licence = DB::table('licences')->get();
-            $data_filiere =DB::table('filieres')->get();
-            return view('tables',compact('data_bac','data_matiere','data_licence','data_filiere'));
+            return view('Gestion_Baccalaureat',compact('data_bac'));
         }
         else{
             return redirect('dashboard');
@@ -37,7 +34,7 @@ class BacController extends Controller
             $bac = new Bac();
             $bac->name = $request->name;
             $bac->save();
-            return redirect('tables');
+            return redirect('bac');
         }
         else{
             return redirect('dashboard');
@@ -59,7 +56,7 @@ class BacController extends Controller
             $bacs = Bac::find($id);
             $input = $request->all();
             $bacs->update($input);
-            return redirect('tables');
+            return redirect('bac');
         }
         else{
             return redirect('dashboard');
@@ -69,7 +66,7 @@ class BacController extends Controller
     public function delete($id){
         if(Auth::user()->role=="admin"){
             DB::table('bacs')->where('id',$id)->delete();
-            return redirect('tables');
+            return redirect('bac');
         }
         else{
             return redirect('dashboard');
