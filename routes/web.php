@@ -78,7 +78,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 
             /** les routes pour charafeddine */
-    Route::get('/inscription',[UserController::class,'index']);
+            /** les routes pour filiere */
+    Route::get('/filiere/create',[FiliereController::class,'index']);
+    Route::post('filiere/create',[FiliereController::class,'create']);
+    Route::get('filiere/update/{id}',[FiliereController::class,'update']);
+
+        /** les routes pour inscription */
+    // Route::get('/inscription',[UserController::class,'first_index']);
+    Route::post('second-setup',[UserController::class,'first_setup']);
+    Route::post('third-setup',[UserController::class,'second_setup']);
+    Route::post('fourth-setup',[UserController::class,'third_setup']);
+
+    Route::get('inscription',[UserController::class,'index']);
+    Route::post('/test',[UserController::class,'index2']);
 
             /** fin les routes pour charafeddine */
 
@@ -113,11 +125,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/licence/delete/{id}',[LicenceController::class,'delete']);
 		    /* fin des routes pour entitie licence* */
 
-                /* debut des routes pour entitie filiere* */
 
-    Route::get('/filiere/create',[FiliereController::class,'index']);
-    Route::post('filiere/create',[FiliereController::class,'create']);
-    Route::get('filiere/update/{id}',[FiliereController::class,'update']);
+
+
 
                 /* fin les routes de abdessamad* */
 });
